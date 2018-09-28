@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Meu Dinheiro</string>
+    <string name="btn_label_category">Adicionar Categoria</string>
+    <string name="label_btn_expense">Adicionar Despesa</string>
+    <string name="category_screen_title">Categorias</string>
+    <string name="hint_category_name">Nome categoria</string>
+    <string name="label_btn_save_category">Salvar</string>
+    <string name="category_success">Categoria adicionada com sucesso</string>
+    <string name="label_show_categories">Ver categorias</string>
+</resources>
