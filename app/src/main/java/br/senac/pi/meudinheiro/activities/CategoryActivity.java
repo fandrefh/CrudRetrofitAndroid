@@ -1,9 +1,11 @@
 package br.senac.pi.meudinheiro.activities;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -37,33 +39,66 @@ public class CategoryActivity extends AppCompatActivity {
         categoryService = APIUtils.getCategoryService();
 
         lvCategories = findViewById(R.id.lv_categories);
+        lvCategories.setOnItemClickListener(clickItem());
 
         findViewById(R.id.btn_save_category).setOnClickListener(saveCategory());
-        findViewById(R.id.btn_show_categories).setOnClickListener(listAllCategories());
+//        findViewById(R.id.btn_show_categories).setOnClickListener(listAllCategories());
+
+        listAllCategories();
     }
 
-    private View.OnClickListener listAllCategories() {
-        return new View.OnClickListener() {
+    private AdapterView.OnItemClickListener clickItem() {
+        return new AdapterView.OnItemClickListener() {
             @Override
-            public void onClick(View v) {
-                Call<List<Category>> call = categoryService.getCategories();
-                call.enqueue(new Callback<List<Category>>() {
-                    @Override
-                    public void onResponse(Call<List<Category>> call, Response<List<Category>> response) {
-                        if (response.isSuccessful()) {
-                            categoryList = response.body();
-                            lvCategories.setAdapter(new CategoryAdapter(CategoryActivity.this, categoryList));
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<List<Category>> call, Throwable t) {
-                        Log.e("curso", t.getMessage());
-                    }
-                });
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(CategoryActivity.this, UpdateDeleteActivity.class);
+                intent.putExtra("id", String.valueOf(id));
+                startActivity(intent);
+                finish();
             }
         };
     }
+
+    public void listAllCategories() {
+        Call<List<Category>> call = categoryService.getCategories();
+        call.enqueue(new Callback<List<Category>>() {
+            @Override
+            public void onResponse(Call<List<Category>> call, Response<List<Category>> response) {
+                if (response.isSuccessful()) {
+                    categoryList = response.body();
+                    lvCategories.setAdapter(new CategoryAdapter(CategoryActivity.this, categoryList));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Category>> call, Throwable t) {
+                Log.e("curso", t.getMessage());
+            }
+        });
+    }
+
+//    private View.OnClickListener listAllCategories() {
+//        return new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Call<List<Category>> call = categoryService.getCategories();
+//                call.enqueue(new Callback<List<Category>>() {
+//                    @Override
+//                    public void onResponse(Call<List<Category>> call, Response<List<Category>> response) {
+//                        if (response.isSuccessful()) {
+//                            categoryList = response.body();
+//                            lvCategories.setAdapter(new CategoryAdapter(CategoryActivity.this, categoryList));
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Call<List<Category>> call, Throwable t) {
+//                        Log.e("curso", t.getMessage());
+//                    }
+//                });
+//            }
+//        };
+//    }
 
     private View.OnClickListener saveCategory() {
         return new View.OnClickListener() {

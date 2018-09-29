@@ -24,4 +24,7 @@ public interface CategoryService {
 
     @DELETE("categories/{id}/")
     Call<Category> deleteCategory(@Path("id") int id);
+
+    @GET("categories/{id}/")
+    Call<Category> getCategoryById(@Path("id") int id);
 }
