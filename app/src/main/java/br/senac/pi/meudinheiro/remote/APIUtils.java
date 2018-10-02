@@ -1,6 +1,7 @@
 package br.senac.pi.meudinheiro.remote;
 
 import br.senac.pi.meudinheiro.services.CategoryService;
+import br.senac.pi.meudinheiro.services.MoneyService;
 
 public class APIUtils {
 
@@ -8,5 +9,9 @@ public class APIUtils {
 
     public static CategoryService getCategoryService() {
         return APIClient.client(BASE_URL).create(CategoryService.class);
+    }
+
+    public static MoneyService getMoneyService() {
+        return APIClient.client(BASE_URL).create(MoneyService.class);
     }
 }

@@ -15,6 +15,17 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         findViewById(R.id.btn_add_category).setOnClickListener(addCategory());
+        findViewById(R.id.btn_add_expense).setOnClickListener(addExpense());
+    }
+
+    private View.OnClickListener addExpense() {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, MoneyActivity.class);
+                startActivity(intent);
+            }
+        };
     }
 
     private View.OnClickListener addCategory() {

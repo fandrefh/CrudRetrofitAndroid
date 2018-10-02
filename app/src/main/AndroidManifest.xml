@@ -19,7 +19,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".activities.CategoryActivity" />
-        <activity android:name=".activities.UpdateDeleteActivity"></activity>
+        <activity android:name=".activities.UpdateDeleteActivity" />
+        <activity android:name=".activities.MoneyActivity"></activity>
     </application>
 
 </manifest>
